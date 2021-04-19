@@ -21,5 +21,9 @@ phases:
       - cd $CODEBUILD_SRC_DIR
       - echo List directory
       - ls -la
+      - echo get nodes
+      - kubectl get nodes
+      - echo get services
+      - kubectl get svc
       - echo Push the latest image to cluster
       - kubectl apply -f deployment.yml
