@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Entered the pre_build phase...
       - echo Logging in to Amazon EKS...
-      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME --role-arn arn:aws:iam::887016865623:role/terraform-eks-demo-node
   build:
     commands:
       - echo Entered the build phase...
@@ -22,14 +22,5 @@ phases:
       - cd $CODEBUILD_SRC_DIR
       - echo List directory
       - ls -la
-      - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::887016865623:role/terraform-eks-demo-node --role-session-name codebuild-kubectl --duration-seconds 900)
-      - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
-      - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
-      - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
-      - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
-      - echo get nodes
-      - kubectl get nodes
-      - echo get services
-      - kubectl get svc
       - echo Push the latest image to cluster
       - kubectl apply -f deployment.yml
