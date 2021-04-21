@@ -22,7 +22,8 @@ spec:
         spec:
             containers:
                 - name: frontend-container
-                  image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-fe:prod
+                  image: vrddocker/fe:latest
+#                   image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-fe:prod
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 80
