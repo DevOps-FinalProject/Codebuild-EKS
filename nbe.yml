@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: node-deployment
+    labels:
+        app: node-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: node-pod
+
+    template:
+        metadata:
+            name: node-pod
+            labels:
+                app: node-pod
+        spec:
+            containers:
+                - name: uber-node-container
+                  image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-benode:prod
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: node-service
+    labels:
+        app: node-service
+spec:
+    type: LoadBalancer
+    ports:
+        - protocol: TCP
+          port: 4000
+          targetPort: 4000
+    selector:
+        app: node-pod
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: node-deployment
+#   labels:
+#     app: node-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: node-pod
+  
+#   template:
+#     metadata:
+#       name: node-pod
+#       labels:
+#         app: node-pod
+#     spec:
+#         containers:
+#           - name: blog-node-container
+#             image: vrddocker/node-be:latest
+#             imagePullPolicy: Always
+#             ports:
+#               - containerPort: 4000
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#    name: nbackend
+#    labels:
+#      app: nbackend
+      
+# spec:
+#    type: LoadBalancer
+#    ports:
+#      - protocol: TCP
+#        port: 4000
+#        targetPort: 4000
+#    selector:
+#      app: node-pod
