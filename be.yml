@@ -18,8 +18,7 @@ spec:
         spec:
             containers:
                 - name: uber-py-container
-                  image: vrddocker/be:latest
-#                   image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-be:prod
+                  image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-be:prod
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 5000
