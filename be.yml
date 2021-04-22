@@ -22,6 +22,11 @@ spec:
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 5000
+                  resources:
+                      limits:
+                        cpu: 500m
+                      requests:
+                        cpu: 200m
                   env:
                       - name: IPADDRESS
                         value: "http://node-service:4000"
@@ -40,3 +45,16 @@ spec:
           targetPort: 5000
     selector:
         app: py-pod
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: py-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: py-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
