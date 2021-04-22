@@ -16,6 +16,8 @@ phases:
       - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME --role-arn arn:aws:iam::887016865623:role/CodeBuildKubectlRole
   build:
     commands:
+      - echo deploy metrics server
+      - kubectl apply -f metric-component.yml
       - echo Entered the build phase...
       - echo Change directory to secondary source
       - cd $CODEBUILD_SRC_DIR
