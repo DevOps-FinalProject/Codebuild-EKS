@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sa-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sa-frontend
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sa-frontend
+    spec:
+      containers:
+        - image: vrddocker/reactapp:a12
+          imagePullPolicy: Always
+          name: sa-frontend
+          ports:
+            - containerPort: 80
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: sa-frontend-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: sa-frontend

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: py-deployment
+    labels:
+        app: py-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: py-pod
+
+    template:
+        metadata:
+            name: py-pod
+            labels:
+                app: py-pod
+        spec:
+            containers:
+                - name: uber-py-container
+                  image: 887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-be:prod
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 5000
+                  env:
+                      - name: IPADDRESS
+                        value: "http://node-service:4000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: py-service
+    labels:
+        app: py-service
+spec:
+    type: LoadBalancer
+    ports:
+        - protocol: TCP
+          port: 5000
+          targetPort: 5000
+    selector:
+        app: py-pod
