@@ -25,10 +25,11 @@ phases:
       - ls -la
       - echo Push the latest image to cluster
       - kubectl delete deployments frontend-deployment
-      - kubectl delete deployments node-deployment
-      - kubectl delete deployments py-deployment
+      - kubectl set image deployment/frontend-deployment frontend-container=887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-fe:prod --record
+#       - kubectl delete deployments node-deployment
+#       - kubectl delete deployments py-deployment
       - kubectl apply -f fe.yml
-      - kubectl apply -f be.yml
-      - kubectl apply -f nbe.yml
+#       - kubectl apply -f be.yml
+#       - kubectl apply -f nbe.yml
       - kubectl get pods
       - kubectl get svc
