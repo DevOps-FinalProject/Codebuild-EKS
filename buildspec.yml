@@ -29,8 +29,10 @@ phases:
 #       - kubectl delete deployments node-deployment
 #       - kubectl delete deployments py-deployment
       - kubectl apply -f fe.yml
-      - kubectl set image deployment/frontend-deployment frontend-container=vrddocker/fe:latest --record
-      - kubectl set image deployment/frontend-deployment frontend-container=887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-fe:prod --record
+      - kubectl delete deployments frontend-deployment
+      - kubectl apply -f fe.yml
+#       - kubectl set image deployment/frontend-deployment frontend-container=vrddocker/fe:latest --record
+#       - kubectl set image deployment/frontend-deployment frontend-container=887016865623.dkr.ecr.us-west-2.amazonaws.com/uber-fe:prod --record
 #       - kubectl apply -f be.yml
 #       - kubectl apply -f nbe.yml
       - kubectl get pods
