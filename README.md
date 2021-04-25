@@ -1,7 +1,6 @@
 # DevOps Project
 
-## This repo contains the terraform files to create the infrastructure on AWS for EKS and also the deployment files for\
-frontend ,python backend and node backend 
+## This repo contains the terraform files to create the infrastructure on AWS for EKS and also the deployment files for frontend ,python backend and node backend 
 
 ## How to create the EKS cluster using terraform IAAC
 
