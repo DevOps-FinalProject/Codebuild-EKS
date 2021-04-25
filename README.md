@@ -2,7 +2,7 @@
 
 ## This repo contains the terraform files to create the infrastructure on AWS for EKS and also the deployment files for frontend ,python backend and node backend 
 
-## How to create the EKS cluster using terraform IAAC
+## How to create the EKS cluster using terraform IAAC(Infrastructure as Code)
 
  1. Initialize terraform repo
     ```bash
