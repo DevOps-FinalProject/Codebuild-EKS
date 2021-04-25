@@ -1,7 +1,7 @@
-# DevOps_EKS
+# DevOps Project
 
-## This repo contains the terraform files to create the infrastructure on AWS for EKS and also the deployment files for
-## frontend ,python backend and node backend 
+## This repo contains the terraform files to create the infrastructure on AWS for EKS and also the deployment files for\
+frontend ,python backend and node backend 
 
 ## How to create the EKS cluster using terraform IAAC
 
@@ -36,38 +36,37 @@
 
 ## Continues delivery using Codebuild
 
+ 1. fe.yml contains the deployment ,service file for react based frontend micro-service
 
- ### fe.yml contains the deployment ,service file for react based frontend micro-service
+ 2. be.yml contains the deployment ,service file for Python(flask) based backend micro-service for Uber business logic
 
- ### be.yml contains the deployment ,service file for Python(flask) based backend micro-service for Uber business logic
+ 3. nbe.yml contains the deployment, service file for Node based backend micro-service for User Authentication
 
- ### nbe.yml contains the deployment, service file for Node based backend micro-service for User Authentication
+ 4. Now that we have created the EKS cluster on AWS, we can deploy our deployments and services.
 
- ### Now that we have created the EKS cluster on AWS, we can deploy our deployments and services.
-
- ### buildspec.yml file contains the commands for creating/updating the deployments ,services on EKS cluster
+ 5. buildspec.yml file contains the commands for creating/updating the deployments ,services on EKS cluster
 
 
 ## Load balancing and Load testing in EKS cluster
 
- ### We will be using Kubernetes Metrics Server as an aggregator of resource usage data in EKS cluster,
+ 1. We will be using Kubernetes Metrics Server as an aggregator of resource usage data in EKS cluster,
 
- ### metric-component.yml file contains the set of instructions to install the matrix server on EKS cluster
+ 2. metric-component.yml file contains the set of instructions to install the matrix server on EKS cluster
 
- ### We are using apache bench for putting the load on the backend \
-    ```
-     ab -n 150000 -c 50 <Backend_Route_to_be_tested> \
+ 3. We are using apache bench for putting the load on the backend
+    ```bash
+     ab -n 150000 -c 50 <backend_route_to_be_tested> \
      This will create 150000 request with maximum of 50 concurrent requests at a time.
     ```
 
- ### The below command will show the details about the scale up and scale down of pods in your EKS cluster
+ 4. The below command will show the details about the scale up and scale down of pods in your EKS cluster
     ```bash
-    kubectl describe deploy py-deployment
+     kubectl describe deploy py-deployment
     ```
     
- ### The below command shows how much is the current load and minimum pods and maximum pods running in your cluster
+ 5. The below command shows how much is the current load and minimum pods and maximum pods running in your cluster
     ```bash
-    kubectl get hpa
+     kubectl get hpa
     ```
  
 
